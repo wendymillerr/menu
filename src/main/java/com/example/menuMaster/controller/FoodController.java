@@ -3,6 +3,10 @@ package com.example.menuMaster.controller;
 
 import com.example.menuMaster.food.Food;
 import com.example.menuMaster.food.FoodRepository;
+
+
+import com.example.menuMaster.food.Food;
+import com.example.menuMaster.food.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,8 @@ public class FoodController {
     public String status(){
         return "Api on";
     }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/foods")
     public List<Food> getAll(){
         List<Food> foodsResponseList =  repository.findAll().stream().map(Food::new).toList(); //O construtor recebe Food
@@ -31,6 +37,8 @@ public class FoodController {
                 .map(food -> ResponseEntity.ok().body(food))
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/post")
     public void saveFood( @RequestBody Food dataFood){
         System.out.println("Id do produto: " + dataFood.getId());
@@ -73,3 +81,5 @@ public class FoodController {
 
 
 }
+
+
